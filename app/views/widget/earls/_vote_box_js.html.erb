@@ -287,6 +287,9 @@ var count = 0;
 	     },
 	     success: function(data){
 		  $.unblockUI();
+          if (data['completed']) {
+            location.href = "/completed"
+          }
 		  $('.indicator').hide();
 		  $('.leftside').html(data["newleft"]);
 		  $('.rightside').html(data["newright"]);

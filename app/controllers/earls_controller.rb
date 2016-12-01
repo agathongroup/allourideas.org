@@ -52,6 +52,9 @@ class EarlsController < ApplicationController
        logger.info "inside questions#show " + @question.inspect
 
        # we can probably make this into one api call
+       if @question.attributes['picked_prompt_id'].nil?
+         redirect_to('/completed') and return
+       end
        @prompt = Prompt.find(@question.attributes['picked_prompt_id'], :params => {:question_id => @question.id})
 
        @right_choice_text = @prompt.right_choice_text

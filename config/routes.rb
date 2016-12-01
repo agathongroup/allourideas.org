@@ -43,6 +43,7 @@ ActionController::Routing::Routes.draw do |map|
   
   map.cookies_blocked '/cookies_blocked.gif', :controller => 'home', :action => 'cookies_blocked'
   map.about '/about', :controller => 'home', :action => 'about'
+  map.completed '/completed', :controller => 'home', :action => 'completed'
   map.admin '/admin', :controller => 'home', :action => 'admin'
   map.privacy '/privacy', :controller => 'home', :action => 'privacy'
   map.privacy_2009_07_06 '/privacy-2009-07-06', :controller => 'home', :action => 'privacy-2009-07-06'

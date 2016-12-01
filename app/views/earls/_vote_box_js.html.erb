@@ -169,7 +169,9 @@
           loadedTime = new Date(); //reset loaded time
         },
         success: function(data){
-
+          if (data['completed']) {
+            location.href = "/completed"
+          }
           loadNewPrompts(data);
 
           $('#prompt_id').val(data["prompt_id"]);

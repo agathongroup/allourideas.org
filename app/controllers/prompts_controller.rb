@@ -18,17 +18,20 @@ class PromptsController < ApplicationController
       )
 
       next_prompt = Hash.from_xml(vote.body)['prompt']
-
-      result = {
-        :newleft           => CGI::escapeHTML(truncate(next_prompt['left_choice_text'], :length => 140, :omission => '…')),
-        :newright          => CGI::escapeHTML(truncate(next_prompt['right_choice_text'], :length => 140, :omission => '…')),
-        :left_choice_id    => next_prompt['left_choice_id'],
-        :left_choice_url   => question_choice_path(@earl.name, next_prompt['left_choice_id']),
-        :right_choice_id   => next_prompt['right_choice_id'],
-        :right_choice_url  => question_choice_path(@earl.name, next_prompt['right_choice_id']),
-        :appearance_lookup => next_prompt['appearance_id'],
-        :prompt_id         => next_prompt['id'],
-      }
+      if next_prompt['left_choice_id'].nil?
+        result = { :completed => true }
+      else
+        result = {
+          :newleft           => CGI::escapeHTML(truncate(next_prompt['left_choice_text'], :length => 140, :omission => '…')),
+          :newright          => CGI::escapeHTML(truncate(next_prompt['right_choice_text'], :length => 140, :omission => '…')),
+          :left_choice_id    => next_prompt['left_choice_id'],
+          :left_choice_url   => question_choice_path(@earl.name, next_prompt['left_choice_id']),
+          :right_choice_id   => next_prompt['right_choice_id'],
+          :right_choice_url  => question_choice_path(@earl.name, next_prompt['right_choice_id']),
+          :appearance_lookup => next_prompt['appearance_id'],
+          :prompt_id         => next_prompt['id'],
+        }
+      end
       @survey_session.appearance_lookup = result[:appearance_lookup]
 
       if wikipedia?

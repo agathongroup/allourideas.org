@@ -17,6 +17,9 @@ class HomeController < ApplicationController
     Question.timeout = nil
   end
 
+  def completed
+  end
+
   def no_google_tracking
   end
 
