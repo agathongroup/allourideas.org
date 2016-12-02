@@ -388,6 +388,9 @@ var count = 0;
 		   },
 
 		      function(data){
+            if (data['completed']) {
+              location.href = "/completed"
+            }
             $('#newlines').remove();
             $('.tellmearea').prepend("<div id = \"tellme_prepended\"" + count + ">" + data["message"] + "</a></div><br/>");
             $("#tellme_prepended").effect("highlight", {}, 1500);

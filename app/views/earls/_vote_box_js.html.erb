@@ -171,6 +171,7 @@
         success: function(data){
           if (data['completed']) {
             location.href = "/completed"
+            return;
           }
           loadNewPrompts(data);
 
@@ -236,6 +237,10 @@
       };
       var url = rootPath + 'questions/' + question_id + '/prompts/' + prompt_id + '/skip.js' + '?locale=<%= I18n.locale %>';
       $.post(url, postData, function(data) {
+        if (data['completed']) {
+          location.href = "/completed"
+          return;
+        }
         $.unblockUI();
         loadNewPrompts(data);
 

@@ -62,18 +62,22 @@ class PromptsController < ApplicationController
                            :skip => get_object_request_options(params, :skip),
                            :next_prompt => get_next_prompt_options)
       next_prompt = Crack::XML.parse(skip.body)['prompt']
+      if next_prompt['left_choice_id'].nil?
+        result = { :completed => true }
+      else
 
-      result = {
-        :newleft           => CGI::escapeHTML(truncate(next_prompt['left_choice_text'], :length => 140, :omission => '…')),
-        :newright          => CGI::escapeHTML(truncate(next_prompt['right_choice_text'], :length => 140, :omission => '…')),
-        :appearance_lookup => next_prompt['appearance_id'],
-        :prompt_id         => next_prompt['id'],
-        :left_choice_id    => next_prompt['left_choice_id'],
-        :left_choice_url   => question_choice_path(@earl.name, next_prompt['left_choice_id']),
-        :right_choice_id   => next_prompt['right_choice_id'],
-        :right_choice_url  => question_choice_path(@earl.name, next_prompt['right_choice_id']),
-        :message => t('vote.cant_decide_message')
-      }
+        result = {
+          :newleft           => CGI::escapeHTML(truncate(next_prompt['left_choice_text'], :length => 140, :omission => '…')),
+          :newright          => CGI::escapeHTML(truncate(next_prompt['right_choice_text'], :length => 140, :omission => '…')),
+          :appearance_lookup => next_prompt['appearance_id'],
+          :prompt_id         => next_prompt['id'],
+          :left_choice_id    => next_prompt['left_choice_id'],
+          :left_choice_url   => question_choice_path(@earl.name, next_prompt['left_choice_id']),
+          :right_choice_id   => next_prompt['right_choice_id'],
+          :right_choice_url  => question_choice_path(@earl.name, next_prompt['right_choice_id']),
+          :message => t('vote.cant_decide_message')
+        }
+      end
       @survey_session.appearance_lookup = result[:appearance_lookup]
 
       if wikipedia?
