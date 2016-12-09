@@ -79,7 +79,7 @@ class Question < ActiveResource::Base
   def url_format_valid
     errors.add("URL", "is blank (Step 2)")  if url.blank?
     errors.add("URL", "contains spaces (Step 2)")  if url.include? ' '
-    errors.add("URL", "contains special characters (Step 2)") if (url.include?('+') || url.parameterize != url)
+    errors.add("URL", "contains special characters (Step 2)") if (url.include?('+') || url.parameterize != url.downcase)
     errors
   end
   
