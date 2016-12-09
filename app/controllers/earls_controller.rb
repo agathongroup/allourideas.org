@@ -53,7 +53,7 @@ class EarlsController < ApplicationController
 
        # we can probably make this into one api call
        if @question.attributes['picked_prompt_id'].nil?
-         redirect_to('/completed') and return
+         redirect_to(url_for(:action => :completed, :controller => :questions, :id => @earl.name)) and return
        end
        @prompt = Prompt.find(@question.attributes['picked_prompt_id'], :params => {:question_id => @question.id})
 

@@ -288,7 +288,7 @@ var count = 0;
 	     success: function(data){
 		  $.unblockUI();
           if (data['completed']) {
-            location.href = "/completed"
+            location.reload();
           }
 		  $('.indicator').hide();
 		  $('.leftside').html(data["newleft"]);
@@ -389,7 +389,7 @@ var count = 0;
 
 		      function(data){
             if (data['completed']) {
-              location.href = "/completed"
+              location.reload();
             }
             $('#newlines').remove();
             $('.tellmearea').prepend("<div id = \"tellme_prepended\"" + count + ">" + data["message"] + "</a></div><br/>");

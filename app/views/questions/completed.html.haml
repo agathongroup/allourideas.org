@@ -1,0 +1,8 @@
+.row-fluid
+  .span8
+    %h1 Thanks for your participation!
+
+    %p You've completed this survey. Thanks!
+    %p
+      %a.btn.btn-primary{:href => url_for(:action => :results, :controller => :questions, :id => @earl.name)}
+        View Results

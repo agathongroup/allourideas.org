@@ -30,6 +30,10 @@ class QuestionsController < ApplicationController
     end
   end
 
+  def completed
+    @earl = Earl.find params[:id]
+  end
+
   # GET /questions/1
   # GET /questions/1.xml
   # def show
