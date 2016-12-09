@@ -1,6 +1,6 @@
 class SurveySession
   @@verifier = ActiveSupport::MessageVerifier.new(APP_CONFIG[:SURVEY_SESSION_SECRET])
-  @@expire_time = 10.minutes
+  @@expire_time = 4.hours
   @@cookie_prefix = "aoi_"
 
   attr_reader :cookie_name, :old_session_id
